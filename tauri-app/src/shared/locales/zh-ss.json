@@ -279,6 +279,14 @@
       "cliRunning": "CLI 模式正在运行项 (PID {pid})，请在终端中停止后再切换",
       "tuiRunningShort": "TUI 运行中项",
       "tuiRunning": "TUI 模式正在运行项 (PID {pid})，请在终端中停止后再切换"
+    },
+    "restoreDefaults": {
+      "title": "恢复默认设置项",
+      "desc": "将常规与音频设置重置为默认值项",
+      "button": "恢复默认设置项",
+      "confirm": "确定将所有设置恢复为默认值项？此操作无法撤销。",
+      "success": "设置已恢复为默认值项",
+      "failed": "恢复默认设置失败项"
     }
   },
   "dialogs": {

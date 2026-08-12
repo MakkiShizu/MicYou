@@ -279,6 +279,14 @@
       "cliRunning": "CLI 模式正在运行喵 (PID {pid})，请先在终端里停掉喵~",
       "tuiRunningShort": "TUI 运行中喵~",
       "tuiRunning": "TUI 模式正在运行喵 (PID {pid})，请先在终端里停掉喵~"
+    },
+    "restoreDefaults": {
+      "title": "恢复默认设置喵~",
+      "desc": "把常规和音频设置重置成默认值喵~",
+      "button": "恢复默认设置喵~",
+      "confirm": "确定把所有设置恢复成默认值喵？此操作没法撤销喵~",
+      "success": "设置已恢复成默认值喵~",
+      "failed": "恢复默认设置失败喵~ (´;ω;`)"
     }
   },
   "dialogs": {

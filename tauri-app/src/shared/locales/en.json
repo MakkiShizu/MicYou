@@ -281,6 +281,14 @@
       "cliRunning": "CLI mode is running (PID {pid}) - stop it in the terminal before switching",
       "tuiRunningShort": "TUI running",
       "tuiRunning": "TUI mode is running (PID {pid}) - stop it in the terminal before switching"
+    },
+    "restoreDefaults": {
+      "title": "Restore Default Settings",
+      "desc": "Reset general and audio settings to their defaults",
+      "button": "Restore Defaults",
+      "confirm": "Restore all settings to their defaults? This cannot be undone.",
+      "success": "Settings restored to defaults",
+      "failed": "Failed to restore defaults"
     }
   },
   "dialogs": {

@@ -279,6 +279,14 @@
       "cliRunning": "CLI 模式运行中 (PID {pid})，先于终端止之",
       "tuiRunningShort": "TUI 运行中",
       "tuiRunning": "TUI 模式运行中 (PID {pid})，先于终端止之"
+    },
+    "restoreDefaults": {
+      "title": "复旧设",
+      "desc": "复常规与音讯之设为初值",
+      "button": "复旧设",
+      "confirm": "必欲复诸设为初值乎？此不可逆也。",
+      "success": "设已复旧",
+      "failed": "复旧设败"
     }
   },
   "dialogs": {
