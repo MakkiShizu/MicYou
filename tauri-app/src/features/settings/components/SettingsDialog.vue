@@ -788,6 +788,26 @@
                     {{ $t('settings.theme.catalogButton') }}
                   </button>
                 </div>
+
+                <!-- Restore Default Theme -->
+                <div
+                  class="bg-red-500/5 border border-red-500/20 backdrop-blur-lg rounded-2xl p-4 flex items-center justify-between shadow-sm"
+                >
+                  <div>
+                    <h4 class="font-bold text-on-surface">
+                      {{ $t('settings.restoreTheme.title') }}
+                    </h4>
+                    <p class="text-xs text-on-surface-variant">
+                      {{ $t('settings.restoreTheme.desc') }}
+                    </p>
+                  </div>
+                  <button
+                    @click="restoreDefaultTheme"
+                    class="flex-shrink-0 rounded-full bg-red-500/15 px-4 py-2 text-sm font-medium text-red-400 transition-colors hover:bg-red-500/25"
+                  >
+                    {{ $t('settings.restoreTheme.button') }}
+                  </button>
+                </div>
               </div>
 
               <!-- AUDIO SECTION -->
@@ -1453,6 +1473,8 @@ const {
   customS,
   customL,
   customVariant,
+  customCss,
+  customCssEnabled,
   systemAccent,
   installedThemeId,
   installedThemeControlsColor,
@@ -2221,8 +2243,6 @@ const defaultAudioSettings = () => ({
 });
 
 async function restoreDefaultSettings() {
-  const ok = confirm(t('settings.restoreDefaults.confirm'));
-  if (!ok) return;
   try {
     // Reset UI preferences (persisted via useStorage -> localStorage)
     closeBehavior.value = null;
@@ -2256,6 +2276,38 @@ async function restoreDefaultSettings() {
   } catch (e) {
     console.error('Failed to restore default settings:', e);
     alert(t('settings.restoreDefaults.failed'));
+  }
+}
+
+async function restoreDefaultTheme() {
+  try {
+    // Light/dark mode
+    colorMode.value = 'auto';
+    // Theme color source + color + variant + custom color
+    themeMode.value = 'system';
+    themeColor.value = 'theme-blue';
+    customVariant.value = 'TonalSpot';
+    customH.value = 215;
+    customS.value = 35;
+    customL.value = 55;
+    // UI style + custom CSS
+    uiStyle.value = 'style-default';
+    customCss.value = '';
+    customCssEnabled.value = true;
+    // Clear installed theme package
+    const themeId = installedThemeId.value;
+    if (themeId) {
+      clearInstalledTheme();
+      try {
+        await invoke('remove_installed_theme', { themeId });
+      } catch (error) {
+        console.warn('Failed to remove installed theme:', error);
+      }
+    }
+    alert(t('settings.restoreTheme.success'));
+  } catch (e) {
+    console.error('Failed to restore default theme:', e);
+    alert(t('settings.restoreTheme.failed'));
   }
 }
 

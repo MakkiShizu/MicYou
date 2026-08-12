@@ -282,11 +282,17 @@
     },
     "restoreDefaults": {
       "title": "复旧设",
-      "desc": "复常规与音讯之设为初值",
+      "desc": "复常规与音讯之设为初值，此不可逆也。",
       "button": "复旧设",
-      "confirm": "必欲复诸设为初值乎？此不可逆也。",
       "success": "设已复旧",
       "failed": "复旧设败"
+    },
+    "restoreTheme": {
+      "title": "复旧题",
+      "desc": "复题色、样与自订 CSS 为初值，此不可逆也。",
+      "button": "复旧题",
+      "success": "题已复旧",
+      "failed": "复旧题败"
     }
   },
   "dialogs": {

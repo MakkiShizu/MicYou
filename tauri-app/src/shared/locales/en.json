@@ -284,11 +284,17 @@
     },
     "restoreDefaults": {
       "title": "Restore Default Settings",
-      "desc": "Reset general and audio settings to their defaults",
+      "desc": "Reset general and audio settings to their defaults. This cannot be undone.",
       "button": "Restore Defaults",
-      "confirm": "Restore all settings to their defaults? This cannot be undone.",
       "success": "Settings restored to defaults",
       "failed": "Failed to restore defaults"
+    },
+    "restoreTheme": {
+      "title": "Restore Default Theme",
+      "desc": "Reset theme color, style, and custom CSS to defaults. This cannot be undone.",
+      "button": "Restore Default Theme",
+      "success": "Theme restored to defaults",
+      "failed": "Failed to restore default theme"
     }
   },
   "dialogs": {
