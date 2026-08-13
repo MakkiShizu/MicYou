@@ -1395,13 +1395,24 @@
     leave-from-class="opacity-100"
     leave-to-class="opacity-0"
   >
-    <div v-if="restoreConfirmTarget" class="fixed inset-0 z-[60] flex items-center justify-center bg-black/40 backdrop-blur-sm">
+    <div
+      v-if="restoreConfirmTarget"
+      class="fixed inset-0 z-[60] flex items-center justify-center bg-black/40 backdrop-blur-sm"
+    >
       <div class="bg-surface rounded-2xl shadow-2xl border border-outline/10 p-6 w-80">
         <h3 class="text-sm font-bold text-foreground mb-2">
-          {{ restoreConfirmTarget === 'settings' ? t('settings.restoreDefaults.title') : t('settings.restoreTheme.title') }}
+          {{
+            restoreConfirmTarget === 'settings'
+              ? t('settings.restoreDefaults.title')
+              : t('settings.restoreTheme.title')
+          }}
         </h3>
         <p class="text-xs text-on-surface-variant mb-5">
-          {{ restoreConfirmTarget === 'settings' ? t('settings.restoreDefaults.desc') : t('settings.restoreTheme.desc') }}
+          {{
+            restoreConfirmTarget === 'settings'
+              ? t('settings.restoreDefaults.desc')
+              : t('settings.restoreTheme.desc')
+          }}
         </p>
         <div class="flex justify-end gap-2">
           <button
@@ -1430,7 +1441,10 @@
     leave-from-class="opacity-100"
     leave-to-class="opacity-0"
   >
-    <div v-if="restoreResult" class="fixed inset-0 z-[60] flex items-center justify-center bg-black/40 backdrop-blur-sm">
+    <div
+      v-if="restoreResult"
+      class="fixed inset-0 z-[60] flex items-center justify-center bg-black/40 backdrop-blur-sm"
+    >
       <div class="bg-surface rounded-2xl shadow-2xl border border-outline/10 p-6 w-80">
         <h3 class="text-sm font-bold text-foreground mb-2">{{ restoreResult.title }}</h3>
         <p class="text-xs text-on-surface-variant mb-5">{{ restoreResult.message }}</p>
@@ -2343,7 +2357,6 @@ async function doRestoreDefaultSettings() {
 
     // Persist + sync to backend (the deep watcher on `settings` also fires)
     saveSettings();
-    await syncSettingsToBackend();
 
     // Disable OS-level autostart if currently enabled
     if (autostartEnabled.value) {
