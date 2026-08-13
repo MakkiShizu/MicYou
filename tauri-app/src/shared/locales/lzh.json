@@ -293,7 +293,8 @@
       "button": "复旧题",
       "success": "题已复旧",
       "failed": "复旧题败"
-    }
+    },
+    "confirmRestore": "确认复旧"
   },
   "dialogs": {
     "close": "闭",

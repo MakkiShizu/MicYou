@@ -1385,6 +1385,66 @@
     @close="showColorPicker = false"
     @apply="applyCustomColor"
   />
+
+  <!-- Restore Confirm Dialog (mirrors App.vue IP switch confirm style) -->
+  <Transition
+    enter-active-class="transition ease-out duration-200"
+    enter-from-class="opacity-0"
+    enter-to-class="opacity-100"
+    leave-active-class="transition ease-in duration-150"
+    leave-from-class="opacity-100"
+    leave-to-class="opacity-0"
+  >
+    <div v-if="restoreConfirmTarget" class="fixed inset-0 z-[60] flex items-center justify-center bg-black/40 backdrop-blur-sm">
+      <div class="bg-surface rounded-2xl shadow-2xl border border-outline/10 p-6 w-80">
+        <h3 class="text-sm font-bold text-foreground mb-2">
+          {{ restoreConfirmTarget === 'settings' ? t('settings.restoreDefaults.title') : t('settings.restoreTheme.title') }}
+        </h3>
+        <p class="text-xs text-on-surface-variant mb-5">
+          {{ restoreConfirmTarget === 'settings' ? t('settings.restoreDefaults.desc') : t('settings.restoreTheme.desc') }}
+        </p>
+        <div class="flex justify-end gap-2">
+          <button
+            class="px-4 py-2 text-xs font-medium text-on-surface-variant hover:bg-surface-variant/50 rounded-lg transition-colors"
+            @click="restoreConfirmTarget = null"
+          >
+            {{ t('dialogs.cancel') }}
+          </button>
+          <button
+            class="px-4 py-2 text-xs font-medium text-on-primary bg-primary hover:bg-primary/90 rounded-lg transition-colors"
+            @click="confirmRestore"
+          >
+            {{ t('settings.confirmRestore') }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </Transition>
+
+  <!-- Restore Result Dialog -->
+  <Transition
+    enter-active-class="transition ease-out duration-200"
+    enter-from-class="opacity-0"
+    enter-to-class="opacity-100"
+    leave-active-class="transition ease-in duration-150"
+    leave-from-class="opacity-100"
+    leave-to-class="opacity-0"
+  >
+    <div v-if="restoreResult" class="fixed inset-0 z-[60] flex items-center justify-center bg-black/40 backdrop-blur-sm">
+      <div class="bg-surface rounded-2xl shadow-2xl border border-outline/10 p-6 w-80">
+        <h3 class="text-sm font-bold text-foreground mb-2">{{ restoreResult.title }}</h3>
+        <p class="text-xs text-on-surface-variant mb-5">{{ restoreResult.message }}</p>
+        <div class="flex justify-end gap-2">
+          <button
+            class="px-4 py-2 text-xs font-medium text-on-primary bg-primary hover:bg-primary/90 rounded-lg transition-colors"
+            @click="restoreResult = null"
+          >
+            {{ t('dialogs.close') }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </Transition>
 </template>
 
 <script setup lang="ts">
@@ -2242,7 +2302,30 @@ const defaultAudioSettings = () => ({
   },
 });
 
-async function restoreDefaultSettings() {
+// In-app confirm + result dialog state for restore actions (mirrors the
+// IP switch confirm dialog style in App.vue — no native confirm()/alert())
+const restoreConfirmTarget = ref<'settings' | 'theme' | null>(null);
+const restoreResult = ref<{ title: string; message: string } | null>(null);
+
+function restoreDefaultSettings() {
+  restoreConfirmTarget.value = 'settings';
+}
+
+function restoreDefaultTheme() {
+  restoreConfirmTarget.value = 'theme';
+}
+
+async function confirmRestore() {
+  const target = restoreConfirmTarget.value;
+  restoreConfirmTarget.value = null;
+  if (target === 'settings') {
+    await doRestoreDefaultSettings();
+  } else if (target === 'theme') {
+    await doRestoreDefaultTheme();
+  }
+}
+
+async function doRestoreDefaultSettings() {
   try {
     // Reset UI preferences (persisted via useStorage -> localStorage)
     closeBehavior.value = null;
@@ -2272,14 +2355,20 @@ async function restoreDefaultSettings() {
       }
     }
 
-    alert(t('settings.restoreDefaults.success'));
+    restoreResult.value = {
+      title: t('settings.restoreDefaults.title'),
+      message: t('settings.restoreDefaults.success'),
+    };
   } catch (e) {
     console.error('Failed to restore default settings:', e);
-    alert(t('settings.restoreDefaults.failed'));
+    restoreResult.value = {
+      title: t('settings.restoreDefaults.title'),
+      message: t('settings.restoreDefaults.failed'),
+    };
   }
 }
 
-async function restoreDefaultTheme() {
+async function doRestoreDefaultTheme() {
   try {
     // Light/dark mode
     colorMode.value = 'auto';
@@ -2304,10 +2393,16 @@ async function restoreDefaultTheme() {
         console.warn('Failed to remove installed theme:', error);
       }
     }
-    alert(t('settings.restoreTheme.success'));
+    restoreResult.value = {
+      title: t('settings.restoreTheme.title'),
+      message: t('settings.restoreTheme.success'),
+    };
   } catch (e) {
     console.error('Failed to restore default theme:', e);
-    alert(t('settings.restoreTheme.failed'));
+    restoreResult.value = {
+      title: t('settings.restoreTheme.title'),
+      message: t('settings.restoreTheme.failed'),
+    };
   }
 }
 

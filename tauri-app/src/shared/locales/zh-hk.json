@@ -293,7 +293,8 @@
       "button": "恢復預設主題",
       "success": "主題已恢復為預設值",
       "failed": "恢復預設主題失敗"
-    }
+    },
+    "confirmRestore": "確認恢復"
   },
   "dialogs": {
     "close": "關閉",

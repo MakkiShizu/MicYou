@@ -295,7 +295,8 @@
       "button": "Restore Default Theme",
       "success": "Theme restored to defaults",
       "failed": "Failed to restore default theme"
-    }
+    },
+    "confirmRestore": "Confirm Restore"
   },
   "dialogs": {
     "close": "Close",

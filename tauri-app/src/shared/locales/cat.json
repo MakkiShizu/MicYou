@@ -293,7 +293,8 @@
       "button": "恢复默认主题喵~",
       "success": "主题已恢复成默认值喵~",
       "failed": "恢复默认主题失败喵~ (´;ω;`)"
-    }
+    },
+    "confirmRestore": "确认恢复喵~"
   },
   "dialogs": {
     "close": "关闭喵~",

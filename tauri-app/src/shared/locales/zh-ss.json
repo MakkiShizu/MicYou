@@ -293,7 +293,8 @@
       "button": "恢复默认主题项",
       "success": "主题已恢复为默认值项",
       "failed": "恢复默认主题失败项"
-    }
+    },
+    "confirmRestore": "确认恢复项"
   },
   "dialogs": {
     "close": "合起来",

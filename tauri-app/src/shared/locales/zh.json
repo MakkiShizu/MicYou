@@ -295,7 +295,8 @@
       "button": "恢复默认主题",
       "success": "主题已恢复为默认值",
       "failed": "恢复默认主题失败"
-    }
+    },
+    "confirmRestore": "确认恢复"
   },
   "dialogs": {
     "close": "关闭",
